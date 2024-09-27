@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html>
+<html style="background-image: url('https://www.svgrepo.com/show/191136/pig.svg');background-size: 100px;background-color: #1c1c1c;">
+
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
@@ -7,17 +8,123 @@
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <!-- <link rel='stylesheet' type='text/css' media='screen' href='main.css'> -->
     <!-- <script src='main.js'></script> -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+
+    <style>
+        body {
+            font-family: "Roboto Condensed", sans-serif;
+            font-optical-sizing: auto;
+            /* font-weight: <weight>;
+            font-style: normal; */
+
+        }
+
+        button {
+            min-height: 50px;
+            min-width: 120px;
+            font-size: 30px;
+        }
+
+
+        @keyframes example {
+            0% {
+                /* background-color: red; */
+                background-position-x: 0px;
+            }
+
+            100% {
+                /* background-color: yellow; */
+                background-position-x: 100px;
+            }
+        }
+
+        html {
+            /* background-color: red; */
+            animation-name: example;
+            animation-duration: 4s;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear
+        }
+    </style>
+
 </head>
+
 <body>
 
-    <div style="
-    background: black;
-">
-    <h1 style="
+    <div style="background: black;
+    position: fixed;
+    width: -webkit-fill-available;
+    left: 0px;
+    top: 0px;
+    color: white;">
+
+        <table style=" width: -webkit-fill-available; margin-left: 20px; margin-right: 20px;">
+            <tr>
+                <td>
+                    <h1 style="align-items: center;display: flex;"> <img
+                            src="https://www.svgrepo.com/show/41907/pig.svg"
+                            style="max-width: 30px; display: inline-block; "> Company name
+                    </h1>
+                </td>
+                <td>
+                    <h1 style="text-align: end;">
+                        <button disabled> About </button>
+                        <button onclick="document.getElementById('div_about').style.display = 'none'"> Pigs </button>
+                        <button> Pig-Clicker </button>
+                    </h1>
+                </td>
+            </tr>
+
+        </table>
+
+
+
+
+
+    </div>
+
+    <div id="div_about" style="
+    position: absolute;
+    top: 98px;
+    min-height: -webkit-fill-available;
+    left: 0px;
+    right: 0px;
+    backdrop-filter: blur(0px);"
+    >
+
+
+        <h1 style="
+    text-align: center;
+    font-size: 50px;
     color: white;
-">test</h1>
-</div>
-    
+    ">About</h1>
+
+
+
+    </div>
+
+
 
 </body>
+
+<script>
+
+    function switch_page(){
+        switch (key) {
+            case value:
+                
+                break;
+        
+            default:
+                break;
+        }
+    }
+
+
+</script>
+
 </html>
