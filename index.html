@@ -49,6 +49,15 @@
             animation-iteration-count: infinite;
             animation-timing-function: linear
         }
+
+        .page {
+            position: absolute;
+            top: 98px;
+            min-height: -webkit-fill-available;
+            left: 0px;
+            right: 0px;
+            backdrop-filter: blur(0px);
+        }
     </style>
 
 </head>
@@ -72,9 +81,9 @@
                 </td>
                 <td>
                     <h1 style="text-align: end;">
-                        <button disabled> About </button>
-                        <button onclick="document.getElementById('div_about').style.display = 'none'"> Pigs </button>
-                        <button> Pig-Clicker </button>
+                        <button id="button1" disabled onclick="switch_page(1)"> About </button>
+                        <button id="button2" onclick="switch_page(2)"> Pigs </button>
+                        <button id="button3" onclick="switch_page(3)"> Pig-Clicker </button>
                     </h1>
                 </td>
             </tr>
@@ -87,14 +96,7 @@
 
     </div>
 
-    <div id="div_about" style="
-    position: absolute;
-    top: 98px;
-    min-height: -webkit-fill-available;
-    left: 0px;
-    right: 0px;
-    backdrop-filter: blur(0px);"
-    >
+    <div id="div_about" class="page" style="display: block;">
 
 
         <h1 style="
@@ -107,15 +109,71 @@
 
     </div>
 
+    <div id="div_pigs" class="page" style="display: none;">
+
+
+        <h1 style="
+    text-align: center;
+    font-size: 50px;
+    color: white;
+    ">Pigs</h1>
+
+
+
+    </div>
+
+    <div id="div_pig-clicker" class="page" style="display: none;">
+
+
+        <h1 style="
+    text-align: center;
+    font-size: 50px;
+    color: white;
+    ">Pig-Clicker</h1>
+
+
+
+    </div>
+
 
 
 </body>
 
 <script>
 
-    function switch_page(){
-        switch (key) {
-            case value:
+    function switch_page(page){
+        switch (page) {
+            case 1:
+                document.getElementById("div_about").style.display = "block";
+                document.getElementById("div_pigs").style.display = "none";
+                document.getElementById("div_pig-clicker").style.display = "none";
+
+                document.getElementById("button1").disabled = true;
+                document.getElementById("button2").disabled = false;
+                document.getElementById("button3").disabled = false;
+
+
+                
+                break;
+            case 2:
+                document.getElementById("div_about").style.display = "none";
+                document.getElementById("div_pigs").style.display = "block";
+                document.getElementById("div_pig-clicker").style.display = "none";
+                
+                document.getElementById("button1").disabled = false;
+                document.getElementById("button2").disabled = true;
+                document.getElementById("button3").disabled = false;
+                
+                break;
+            case 3:
+
+                document.getElementById("div_about").style.display = "none";
+                document.getElementById("div_pigs").style.display = "none";
+                document.getElementById("div_pig-clicker").style.display = "block";
+                
+                document.getElementById("button1").disabled = false;
+                document.getElementById("button2").disabled = false;
+                document.getElementById("button3").disabled = true;
                 
                 break;
         
