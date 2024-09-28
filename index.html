@@ -29,6 +29,10 @@
             font-size: 30px;
         }
 
+        h1 {
+            color: white;
+        }
+
 
         @keyframes example {
             0% {
@@ -45,7 +49,7 @@
         html {
             /* background-color: red; */
             animation-name: example;
-            animation-duration: 4s;
+            animation-duration: 6s;
             animation-iteration-count: infinite;
             animation-timing-function: linear
         }
@@ -58,6 +62,8 @@
             right: 0px;
             backdrop-filter: blur(0px);
         }
+
+
     </style>
 
 </head>
@@ -69,7 +75,9 @@
     width: -webkit-fill-available;
     left: 0px;
     top: 0px;
-    color: white;">
+    color: white;
+    z-index: 1;
+    ">
 
         <table style=" width: -webkit-fill-available; margin-left: 20px; margin-right: 20px;">
             <tr>
@@ -102,7 +110,6 @@
         <h1 style="
     text-align: center;
     font-size: 50px;
-    color: white;
     ">About</h1>
 
 
@@ -115,8 +122,11 @@
         <h1 style="
     text-align: center;
     font-size: 50px;
-    color: white;
     ">Pigs</h1>
+
+    <table id="pig_list" style="width: 100%;" ></table>
+
+
 
 
 
@@ -128,7 +138,6 @@
         <h1 style="
     text-align: center;
     font-size: 50px;
-    color: white;
     ">Pig-Clicker</h1>
 
 
@@ -140,6 +149,75 @@
 </body>
 
 <script>
+
+    const pig1 = {name:"test1", description: "test pig for development"}
+    const pig2 = {name:"test2", description: "test pig for development"}
+    const pig3 = {name:"test3", description: "test pig for development"}
+    const pig4 = {name:"test4", description: "test pig for development"}
+    const pig5 = {name:"test5", description: "test pig for development"}
+    const pig6 = {name:"test6", description: "test pig for development"}
+    const pig7 = {name:"test7", description: "test pig for development"}
+    const pig8 = {name:"test8", description: "test pig for development"}
+    const pig9 = {name:"test9", description: "test pig for development"}
+    const pig10 = {name:"test10", description: "test pig for development"}
+    const pig11 = {name:"test11", description: "test pig for development"}
+    const pig12 = {name:"test12", description: "test pig for development"}
+    const pig13 = {name:"test13", description: "test pig for development"}
+
+    const pigs = [pig1, pig2, pig3, pig4, pig5, pig6, pig7, pig8, pig9, pig10, pig11, pig12, pig13]
+
+    var pig_table = document.getElementById("pig_list")
+
+    table_row = 1;
+
+    for (const i in pigs) {
+
+
+        var tr
+
+        if (!document.getElementById("table_row"+table_row)){
+            tr = document.createElement("tr");
+            tr.id = "table_row"+table_row;
+        } else {
+            tr = document.getElementById("table_row"+table_row)
+        }
+
+
+        if ((parseInt(i)+1)%3 == 0){
+            table_row++;
+        }
+
+        var td = document.createElement("td");
+
+        td.style = "text-align: -webkit-center; padding-bottom :11px"
+
+        var div = document.createElement("div");
+
+        div.style = "width: min-content; border: 8px solid grey; border-radius: 12px; background: grey;"
+
+        pig_table.appendChild(tr);
+        tr.appendChild(td);
+
+        var img = document.createElement("img");
+        img.src = "pigs_pictures/" + pigs[i].name + ".jpg";
+
+        var pig_name = document.createElement("h1");
+        var pig_description = document.createElement("p");
+
+        pig_name.textContent = pigs[i].name;
+        pig_description.textContent = pigs[i].description;
+
+        td.appendChild(div);
+        div.appendChild(img);
+        div.appendChild(pig_name);
+        div.appendChild(pig_description);
+        
+
+    }
+
+    
+
+
 
     function switch_page(page){
         switch (page) {
