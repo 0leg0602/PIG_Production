@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html style="background-image: url('https://www.svgrepo.com/show/191136/pig.svg');background-size: 100px;background-color: #1c1c1c;">
+<html
+    style="background-image: url('https://www.svgrepo.com/show/191136/pig.svg');background-size: 100px;background-color: #1c1c1c;">
 
 <head>
     <meta charset='utf-8'>
@@ -62,8 +63,6 @@
             right: 0px;
             backdrop-filter: blur(0px);
         }
-
-
     </style>
 
 </head>
@@ -124,7 +123,23 @@
     font-size: 50px;
     ">Pigs</h1>
 
-    <table id="pig_list" style="width: 100%;" ></table>
+        <hr>
+
+        <h1 style="
+    text-align: center;
+    font-size: 50px;
+    ">Your pigs:</h1>
+
+        <table id="owned_pig_list" style="width: 100%;"></table>
+
+        <hr>
+
+        <h1 style="
+    text-align: center;
+    font-size: 50px;
+    ">Avaliable pigs:</h1>
+
+        <table id="pig_list" style="width: 100%;"></table>
 
 
 
@@ -150,76 +165,157 @@
 
 <script>
 
-    const pig1 = {name:"test1", description: "test pig for development"}
-    const pig2 = {name:"test2", description: "test pig for development"}
-    const pig3 = {name:"test3", description: "test pig for development"}
-    const pig4 = {name:"test4", description: "test pig for development"}
-    const pig5 = {name:"test5", description: "test pig for development"}
-    const pig6 = {name:"test6", description: "test pig for development"}
-    const pig7 = {name:"test7", description: "test pig for development"}
-    const pig8 = {name:"test8", description: "test pig for development"}
-    const pig9 = {name:"test9", description: "test pig for development"}
-    const pig10 = {name:"test10", description: "test pig for development"}
-    const pig11 = {name:"test11", description: "test pig for development"}
-    const pig12 = {name:"test12", description: "test pig for development"}
-    const pig13 = {name:"test13", description: "test pig for development"}
+    const pig1 = { name: "test1", description: "test pig for development", code: "0319076161392" }
+    const pig2 = { name: "test2", description: "test pig for development", code: "12345" }
+    const pig3 = { name: "test3", description: "test pig for development", code: "12345" }
+    const pig4 = { name: "test4", description: "test pig for development", code: "12345" }
+    const pig5 = { name: "test5", description: "test pig for development", code: "12345" }
+    const pig6 = { name: "test6", description: "test pig for development", code: "12345" }
+    const pig7 = { name: "test7", description: "test pig for development", code: "12345" }
+    const pig8 = { name: "test8", description: "test pig for development", code: "12345" }
+    const pig9 = { name: "test9", description: "test pig for development", code: "12345" }
+    const pig10 = { name: "test10", description: "test pig for development", code: "12345" }
+    const pig11 = { name: "test11", description: "test pig for development", code: "12345" }
+    const pig12 = { name: "test12", description: "test pig for development", code: "12345" }
+    const pig13 = { name: "test13", description: "test pig for development", code: "12345" }
 
     const pigs = [pig1, pig2, pig3, pig4, pig5, pig6, pig7, pig8, pig9, pig10, pig11, pig12, pig13]
 
-    var pig_table = document.getElementById("pig_list")
-
-    table_row = 1;
-
-    for (const i in pigs) {
+    var owned_pig_table2 = document.getElementById("owned_pig_list")
 
 
-        var tr
 
-        if (!document.getElementById("table_row"+table_row)){
-            tr = document.createElement("tr");
-            tr.id = "table_row"+table_row;
+    create_pig_table(document.getElementById("pig_list"), false)
+    create_pig_table(document.getElementById("owned_pig_list"), true)
+
+
+
+
+    function create_pig_table(pig_table, is_owned_pig_list) {
+
+        table_elements_number = pig_table.childNodes.length;
+
+        for (let i = 0; i < table_elements_number; i++) {
+            pig_table.childNodes[0].remove()
+        }
+
+        // table_row_number = 1;
+        element_number = 0;
+
+        var pigs_list;
+
+        if (is_owned_pig_list) {
+            pigs_list = JSON.parse(localStorage.getItem("pigs"));
+
+            if (!pigs_list || pigs_list.length == 0) {
+                localStorage.setItem("pigs", "[]")
+                var tr1 = document.createElement("tr");
+                var td1 = document.createElement("td");
+
+                td1.style = "text-align: center;";
+
+                var label = document.createElement("h1");
+                label.textContent = "You currently have no pigs. Claim a pig to add it to your collection.";
+
+
+                pig_table.appendChild(tr1);
+                tr1.appendChild(td1);
+                td1.appendChild(label);
+
+            }
+
+
         } else {
-            tr = document.getElementById("table_row"+table_row)
+            pigs_list = pigs;
         }
 
+        for (const i in pigs_list) {
 
-        if ((parseInt(i)+1)%3 == 0){
-            table_row++;
+            var create_element = true;
+
+            if (!is_owned_pig_list) {
+                for (const i2 in JSON.parse(localStorage.getItem("pigs"))) {
+                    if (pigs_list[i].name == JSON.parse(localStorage.getItem("pigs"))[i2].name) {
+                        create_element = false;
+                    }
+                }
+            }
+
+
+            if (create_element) {
+
+                var table_row
+
+                // if (!document.getElementById(pig_table.id + "_table_row" + table_row_number)) {
+                //     table_row = document.createElement("tr");
+                //     table_row.id = pig_table.id + "_table_row" + table_row_number;
+                // } else {
+                //     table_row = document.getElementById(pig_table.id + "_table_row" + table_row_number)
+                // }
+
+                if (!document.getElementById(pig_table.id + "_table_row" + Math.floor(element_number / 3))) {
+                    table_row = document.createElement("tr");
+                    table_row.id = pig_table.id + "_table_row" + Math.floor(element_number / 3);
+                } else {
+                    table_row = document.getElementById(pig_table.id + "_table_row" + Math.floor(element_number / 3));
+                }
+
+
+                // if ((parseInt(i) + 1) % 3 == 0) {
+                //     table_row_number++;
+                // }
+
+                element_number++;
+
+                var table_date = document.createElement("td");
+
+                table_date.style = "text-align: -webkit-center; padding-bottom :11px"
+
+                var div = document.createElement("div");
+
+                div.style = "width: min-content; border: 8px solid grey; border-radius: 12px; background: grey;"
+
+                pig_table.appendChild(table_row);
+                table_row.appendChild(table_date);
+
+                var img = document.createElement("img");
+                img.src = "pigs_pictures/" + pigs_list[i].name + ".jpg";
+
+                var pig_name = document.createElement("h1");
+                var pig_description = document.createElement("p");
+
+                var claim_a_pig_button
+
+                if (!is_owned_pig_list) {
+                    claim_a_pig_button = document.createElement("button");
+                    claim_a_pig_button.textContent = "CLAIM THE PIG";
+                    claim_a_pig_button.addEventListener('click', function () {
+                        claim_a_pig(pigs_list[i]);
+                    });
+                }
+
+                pig_name.textContent = pigs_list[i].name;
+                pig_description.textContent = pigs_list[i].description;
+
+                table_date.appendChild(div);
+                div.appendChild(img);
+                div.appendChild(pig_name);
+                div.appendChild(pig_description);
+                if (!is_owned_pig_list) {
+                    div.appendChild(claim_a_pig_button);
+                }
+
+            }
+
+
         }
-
-        var td = document.createElement("td");
-
-        td.style = "text-align: -webkit-center; padding-bottom :11px"
-
-        var div = document.createElement("div");
-
-        div.style = "width: min-content; border: 8px solid grey; border-radius: 12px; background: grey;"
-
-        pig_table.appendChild(tr);
-        tr.appendChild(td);
-
-        var img = document.createElement("img");
-        img.src = "pigs_pictures/" + pigs[i].name + ".jpg";
-
-        var pig_name = document.createElement("h1");
-        var pig_description = document.createElement("p");
-
-        pig_name.textContent = pigs[i].name;
-        pig_description.textContent = pigs[i].description;
-
-        td.appendChild(div);
-        div.appendChild(img);
-        div.appendChild(pig_name);
-        div.appendChild(pig_description);
-        
-
     }
 
-    
 
 
 
-    function switch_page(page){
+
+    function switch_page(page) {
         switch (page) {
             case 1:
                 document.getElementById("div_about").style.display = "block";
@@ -231,32 +327,49 @@
                 document.getElementById("button3").disabled = false;
 
 
-                
+
                 break;
             case 2:
                 document.getElementById("div_about").style.display = "none";
                 document.getElementById("div_pigs").style.display = "block";
                 document.getElementById("div_pig-clicker").style.display = "none";
-                
+
                 document.getElementById("button1").disabled = false;
                 document.getElementById("button2").disabled = true;
                 document.getElementById("button3").disabled = false;
-                
+
                 break;
             case 3:
 
                 document.getElementById("div_about").style.display = "none";
                 document.getElementById("div_pigs").style.display = "none";
                 document.getElementById("div_pig-clicker").style.display = "block";
-                
+
                 document.getElementById("button1").disabled = false;
                 document.getElementById("button2").disabled = false;
                 document.getElementById("button3").disabled = true;
-                
+
                 break;
-        
+
             default:
                 break;
+        }
+    }
+
+    function claim_a_pig(pig_to_claim) {
+        let pig_code = prompt("Enter the pig code:");
+        if (pig_code == pig_to_claim.code) {
+
+            var parsedLocalPigs = JSON.parse(localStorage.getItem("pigs"));
+            parsedLocalPigs[parsedLocalPigs.length] = pig_to_claim;
+            localStorage.setItem("pigs", JSON.stringify(parsedLocalPigs));
+
+            create_pig_table(document.getElementById("pig_list"), false)
+            create_pig_table(document.getElementById("owned_pig_list"), true)
+
+            // localStorage.pigs[localStorage.pigs.lenght] = JSON.stringify(pig_to_claim);
+        } else {
+            alert("Wrond code");
         }
     }
 
