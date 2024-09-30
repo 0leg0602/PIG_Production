@@ -63,6 +63,31 @@
             right: 0px;
             backdrop-filter: blur(0px);
         }
+
+        .card_button {
+            width: min-content;
+            border: 8px solid grey;
+            border-radius: 12px;
+            border-color: grey;
+            background: grey;
+        }
+        
+        .card_button:hover {
+            width: min-content;
+            border: 8px solid lightgrey;
+            border-radius: 12px;
+            border-color: lightgrey;
+            background: lightgrey;
+        }
+        
+        .card_button:active {
+            width: min-content;
+            border: 8px solid lightgrey;
+            border-radius: 12px;
+            border-color: lightgrey;
+            background: lightgrey;
+            filter: contrast(0) brightness(3);
+        }
     </style>
 
 </head>
@@ -156,6 +181,14 @@
     ">Pig-Clicker</h1>
 
 
+        <table id="owned_pig_list_for_pig_clicker" style="position: absolute;top: 0;overflow-y: scroll;bottom: 0;display: block;"></table>
+
+        <div id="div_clicking_pig" style="position: absolute;top: 0px;left: 0px;right: 0px;bottom: 0px;text-align: -webkit-center;align-content: center;z-index: -1;">
+            <h1>test</h1>
+            <div style="width: min-content; border: 8px solid grey; border-radius: 12px; background: grey;" ><img src="pigs_pictures/test1.jpg"></div>
+            
+            
+        </div>
 
     </div>
 
@@ -185,13 +218,16 @@
 
 
 
-    create_pig_table(document.getElementById("pig_list"), false)
-    create_pig_table(document.getElementById("owned_pig_list"), true)
+    create_pig_table(document.getElementById("pig_list"), false, false)
+    create_pig_table(document.getElementById("owned_pig_list"), true, false)
+    create_pig_table(document.getElementById("owned_pig_list_for_pig_clicker"), true, true)
 
 
 
 
-    function create_pig_table(pig_table, is_owned_pig_list) {
+    function create_pig_table(pig_table, is_owned_pig_list, for_pig_clicker) {
+
+        
 
         table_elements_number = pig_table.childNodes.length;
 
@@ -199,7 +235,6 @@
             pig_table.childNodes[0].remove()
         }
 
-        // table_row_number = 1;
         element_number = 0;
 
         var pigs_list;
@@ -208,7 +243,14 @@
             pigs_list = JSON.parse(localStorage.getItem("pigs"));
 
             if (!pigs_list || pigs_list.length == 0) {
+
                 localStorage.setItem("pigs", "[]")
+
+                if (for_pig_clicker){
+                    return;
+                }
+
+
                 var tr1 = document.createElement("tr");
                 var td1 = document.createElement("td");
 
@@ -244,42 +286,43 @@
 
             if (create_element) {
 
-                var table_row
+                var table_row;
+                var number_of_rows;
 
-                // if (!document.getElementById(pig_table.id + "_table_row" + table_row_number)) {
-                //     table_row = document.createElement("tr");
-                //     table_row.id = pig_table.id + "_table_row" + table_row_number;
-                // } else {
-                //     table_row = document.getElementById(pig_table.id + "_table_row" + table_row_number)
-                // }
-
-                if (!document.getElementById(pig_table.id + "_table_row" + Math.floor(element_number / 3))) {
-                    table_row = document.createElement("tr");
-                    table_row.id = pig_table.id + "_table_row" + Math.floor(element_number / 3);
+                if (for_pig_clicker){
+                    number_of_rows = 1;
                 } else {
-                    table_row = document.getElementById(pig_table.id + "_table_row" + Math.floor(element_number / 3));
+                    number_of_rows = 3;
                 }
 
-
-                // if ((parseInt(i) + 1) % 3 == 0) {
-                //     table_row_number++;
-                // }
+                if (!document.getElementById(pig_table.id + "_table_row" + Math.floor(element_number / number_of_rows))) {
+                    table_row = document.createElement("tr");
+                    table_row.id = pig_table.id + "_table_row" + Math.floor(element_number / number_of_rows);
+                } else {
+                    table_row = document.getElementById(pig_table.id + "_table_row" + Math.floor(element_number / number_of_rows));
+                }
 
                 element_number++;
 
                 var table_date = document.createElement("td");
 
                 table_date.style = "text-align: -webkit-center; padding-bottom :11px"
-
-                var div = document.createElement("div");
-
-                div.style = "width: min-content; border: 8px solid grey; border-radius: 12px; background: grey;"
+                var card_div = document.createElement("div");
+                if (for_pig_clicker){
+                        card_div.addEventListener('click', function () {
+                            set_pig_clicker_pig(pigs_list[i]);
+                        });
+                        card_div.className = "card_button";
+                } else {
+                    card_div.style = "width: min-content; border: 8px solid grey; border-radius: 12px; background: grey;"
+                }
 
                 pig_table.appendChild(table_row);
                 table_row.appendChild(table_date);
 
                 var img = document.createElement("img");
                 img.src = "pigs_pictures/" + pigs_list[i].name + ".jpg";
+                img.setAttribute('draggable', false);
 
                 var pig_name = document.createElement("h1");
                 var pig_description = document.createElement("p");
@@ -297,12 +340,12 @@
                 pig_name.textContent = pigs_list[i].name;
                 pig_description.textContent = pigs_list[i].description;
 
-                table_date.appendChild(div);
-                div.appendChild(img);
-                div.appendChild(pig_name);
-                div.appendChild(pig_description);
+                table_date.appendChild(card_div);
+                card_div.appendChild(img);
+                card_div.appendChild(pig_name);
+                card_div.appendChild(pig_description);
                 if (!is_owned_pig_list) {
-                    div.appendChild(claim_a_pig_button);
+                    card_div.appendChild(claim_a_pig_button);
                 }
 
             }
@@ -326,6 +369,8 @@
                 document.getElementById("button2").disabled = false;
                 document.getElementById("button3").disabled = false;
 
+                document.querySelector("html").style.overflow = "auto"
+
 
 
                 break;
@@ -338,6 +383,8 @@
                 document.getElementById("button2").disabled = true;
                 document.getElementById("button3").disabled = false;
 
+                document.querySelector("html").style.overflow = "auto"
+
                 break;
             case 3:
 
@@ -348,6 +395,8 @@
                 document.getElementById("button1").disabled = false;
                 document.getElementById("button2").disabled = false;
                 document.getElementById("button3").disabled = true;
+
+                document.querySelector("html").style.overflow = "hidden"
 
                 break;
 
@@ -366,11 +415,16 @@
 
             create_pig_table(document.getElementById("pig_list"), false)
             create_pig_table(document.getElementById("owned_pig_list"), true)
+            create_pig_table(document.getElementById("owned_pig_list_for_pig_clicker"), true, true)
 
             // localStorage.pigs[localStorage.pigs.lenght] = JSON.stringify(pig_to_claim);
         } else {
             alert("Wrond code");
         }
+    }
+
+    function set_pig_clicker_pig(pig_to_set){
+        console.log(pig_to_set)
     }
 
 
