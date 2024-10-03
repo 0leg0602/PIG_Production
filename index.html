@@ -115,8 +115,8 @@
                     <h1 style="text-align: end;">
                         <button id="button1" disabled onclick="switch_page(1)"> About </button>
                         <button id="button2" onclick="switch_page(2)"> Pigs </button>
-                        <button id="button3" onclick="switch_page(3)"> Pig-Clicker </button>
-                        <button id="button4" onclick="switch_page(4)"> Pig-Roulette </button>
+                        <!-- <button id="button3" onclick="switch_page(3)"> Pig-Clicker </button>
+                        <button id="button4" onclick="switch_page(4)"> Pig-Roulette </button> -->
                     </h1>
                 </td>
             </tr>
@@ -200,21 +200,29 @@
 
 <script>
 
-    const pig1 = { name: "test1", description: "test pig for development", code: "0319076161392", rarity: "ultra rare"}
-    const pig2 = { name: "test2", description: "test pig for development", code: "12345", rarity: "very rare"}
-    const pig3 = { name: "test3", description: "test pig for development", code: "12345", rarity: "rare"}
-    const pig4 = { name: "test4", description: "test pig for development", code: "12345", rarity: "uncommon"}
-    const pig5 = { name: "test5", description: "test pig for development", code: "12345", rarity: "common"}
-    const pig6 = { name: "test6", description: "test pig for development", code: "12345", rarity: "common"}
-    const pig7 = { name: "test7", description: "test pig for development", code: "12345", rarity: "common"}
-    const pig8 = { name: "test8", description: "test pig for development", code: "12345", rarity: "common"}
-    const pig9 = { name: "test9", description: "test pig for development", code: "12345", rarity: "common"}
-    const pig10 = { name: "test10", description: "test pig for development", code: "12345", rarity: "common"}
-    const pig11 = { name: "test11", description: "test pig for development", code: "12345", rarity: "common"}
-    const pig12 = { name: "test12", description: "test pig for development", code: "12345", rarity: "common"}
-    const pig13 = { name: "test13", description: "test pig for development", code: "12345", rarity: "common"}
+    const test_pig1 = { name: "test1", description: "test pig for development", code: "0319076161392", rarity: "ultra rare"}
+    const test_pig2 = { name: "test2", description: "test pig for development", code: "12345", rarity: "very rare"}
+    const test_pig3 = { name: "test3", description: "test pig for development", code: "12345", rarity: "rare"}
+    const test_pig4 = { name: "test4", description: "test pig for development", code: "12345", rarity: "uncommon"}
+    const test_pig5 = { name: "test5", description: "test pig for development", code: "12345", rarity: "common"}
+    const test_pig6 = { name: "test6", description: "test pig for development", code: "12345", rarity: "common"}
+    const test_pig7 = { name: "test7", description: "test pig for development", code: "12345", rarity: "common"}
+    const test_pig8 = { name: "test8", description: "test pig for development", code: "12345", rarity: "common"}
+    const test_pig9 = { name: "test9", description: "test pig for development", code: "12345", rarity: "common"}
+    const test_pig10 = { name: "test10", description: "test pig for development", code: "12345", rarity: "common"}
+    const test_pig11 = { name: "test11", description: "test pig for development", code: "12345", rarity: "common"}
+    const test_pig12 = { name: "test12", description: "test pig for development", code: "12345", rarity: "common"}
+    const test_pig13 = { name: "test13", description: "test pig for development", code: "12345", rarity: "common"}
+    
 
-    const pigs = [pig1, pig2, pig3, pig4, pig5, pig6, pig7, pig8, pig9, pig10, pig11, pig12, pig13]
+
+
+    const pig1 = { name: "Porky", description: "Fist pig ever made!", code: "54321", rarity: "rare"}
+    const pig2 = { name: "MsPiggy", description: "Perry's best friend.", code: "10342", rarity: "common"}
+    const pig3 = { name: "Perry", description: "He is lonely when he has no friends around.", code: "72683", rarity: "common"}
+    const pig4 = { name: "Bacon", description: "He hates people because they tried to turn him into bacon.", code: "39810", rarity: "uncommon"}
+
+    const pigs = [pig1, pig2, pig3, pig4]
 
     var owned_pig_table2 = document.getElementById("owned_pig_list")
 
