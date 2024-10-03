@@ -71,7 +71,7 @@
             border-color: grey;
             background: grey;
         }
-        
+
         .card_button:hover {
             width: min-content;
             border: 8px solid lightgrey;
@@ -79,7 +79,7 @@
             border-color: lightgrey;
             background: lightgrey;
         }
-        
+
         .card_button:active {
             width: min-content;
             border: 8px solid lightgrey;
@@ -108,7 +108,7 @@
                 <td>
                     <h1 style="align-items: center;display: flex;"> <img
                             src="https://www.svgrepo.com/show/41907/pig.svg"
-                            style="max-width: 30px; display: inline-block; "> Company name
+                            style="max-width: 30px; display: inline-block; "> Pigs Я Us
                     </h1>
                 </td>
                 <td>
@@ -116,6 +116,7 @@
                         <button id="button1" disabled onclick="switch_page(1)"> About </button>
                         <button id="button2" onclick="switch_page(2)"> Pigs </button>
                         <button id="button3" onclick="switch_page(3)"> Pig-Clicker </button>
+                        <button id="button4" onclick="switch_page(4)"> Pig-Roulette </button>
                     </h1>
                 </td>
             </tr>
@@ -166,10 +167,6 @@
 
         <table id="pig_list" style="width: 100%;"></table>
 
-
-
-
-
     </div>
 
     <div id="div_pig-clicker" class="page" style="display: none;">
@@ -179,16 +176,21 @@
     text-align: center;
     font-size: 50px;
     ">Pig-Clicker</h1>
-
-
-        <table id="owned_pig_list_for_pig_clicker" style="position: absolute;top: 0;overflow-y: scroll;bottom: 0;display: block;"></table>
-
-        <div id="div_clicking_pig" style="position: absolute;top: 0px;left: 0px;right: 0px;bottom: 0px;text-align: -webkit-center;align-content: center;z-index: -1;">
-            <h1>test</h1>
-            <div style="width: min-content; border: 8px solid grey; border-radius: 12px; background: grey;" ><img src="pigs_pictures/test1.jpg"></div>
-            
-            
+        <table id="owned_pig_list_for_pig_clicker"
+            style="position: absolute;top: 0;overflow-y: scroll;bottom: 0;display: block;"></table>
+        <div id="div_clicking_pig"
+            style="position: absolute;top: 0px;left: 0px;right: 0px;bottom: 0px;text-align: -webkit-center;align-content: center;z-index: -1;">
         </div>
+
+    </div>
+
+    <div id="div_pig-roulette" class="page" style="display: none;">
+
+
+        <h1 style="
+    text-align: center;
+    font-size: 50px;
+    ">Pig-Roulette</h1>
 
     </div>
 
@@ -198,19 +200,19 @@
 
 <script>
 
-    const pig1 = { name: "test1", description: "test pig for development", code: "0319076161392" }
-    const pig2 = { name: "test2", description: "test pig for development", code: "12345" }
-    const pig3 = { name: "test3", description: "test pig for development", code: "12345" }
-    const pig4 = { name: "test4", description: "test pig for development", code: "12345" }
-    const pig5 = { name: "test5", description: "test pig for development", code: "12345" }
-    const pig6 = { name: "test6", description: "test pig for development", code: "12345" }
-    const pig7 = { name: "test7", description: "test pig for development", code: "12345" }
-    const pig8 = { name: "test8", description: "test pig for development", code: "12345" }
-    const pig9 = { name: "test9", description: "test pig for development", code: "12345" }
-    const pig10 = { name: "test10", description: "test pig for development", code: "12345" }
-    const pig11 = { name: "test11", description: "test pig for development", code: "12345" }
-    const pig12 = { name: "test12", description: "test pig for development", code: "12345" }
-    const pig13 = { name: "test13", description: "test pig for development", code: "12345" }
+    const pig1 = { name: "test1", description: "test pig for development", code: "0319076161392", rarity: "ultra rare"}
+    const pig2 = { name: "test2", description: "test pig for development", code: "12345", rarity: "very rare"}
+    const pig3 = { name: "test3", description: "test pig for development", code: "12345", rarity: "rare"}
+    const pig4 = { name: "test4", description: "test pig for development", code: "12345", rarity: "uncommon"}
+    const pig5 = { name: "test5", description: "test pig for development", code: "12345", rarity: "common"}
+    const pig6 = { name: "test6", description: "test pig for development", code: "12345", rarity: "common"}
+    const pig7 = { name: "test7", description: "test pig for development", code: "12345", rarity: "common"}
+    const pig8 = { name: "test8", description: "test pig for development", code: "12345", rarity: "common"}
+    const pig9 = { name: "test9", description: "test pig for development", code: "12345", rarity: "common"}
+    const pig10 = { name: "test10", description: "test pig for development", code: "12345", rarity: "common"}
+    const pig11 = { name: "test11", description: "test pig for development", code: "12345", rarity: "common"}
+    const pig12 = { name: "test12", description: "test pig for development", code: "12345", rarity: "common"}
+    const pig13 = { name: "test13", description: "test pig for development", code: "12345", rarity: "common"}
 
     const pigs = [pig1, pig2, pig3, pig4, pig5, pig6, pig7, pig8, pig9, pig10, pig11, pig12, pig13]
 
@@ -227,13 +229,9 @@
 
     function create_pig_table(pig_table, is_owned_pig_list, for_pig_clicker) {
 
-        
 
-        table_elements_number = pig_table.childNodes.length;
 
-        for (let i = 0; i < table_elements_number; i++) {
-            pig_table.childNodes[0].remove()
-        }
+        pig_table.replaceChildren()
 
         element_number = 0;
 
@@ -246,7 +244,7 @@
 
                 localStorage.setItem("pigs", "[]")
 
-                if (for_pig_clicker){
+                if (for_pig_clicker) {
                     return;
                 }
 
@@ -289,7 +287,7 @@
                 var table_row;
                 var number_of_rows;
 
-                if (for_pig_clicker){
+                if (for_pig_clicker) {
                     number_of_rows = 1;
                 } else {
                     number_of_rows = 3;
@@ -308,13 +306,54 @@
 
                 table_date.style = "text-align: -webkit-center; padding-bottom :11px"
                 var card_div = document.createElement("div");
-                if (for_pig_clicker){
-                        card_div.addEventListener('click', function () {
-                            set_pig_clicker_pig(pigs_list[i]);
-                        });
-                        card_div.className = "card_button";
+                if (for_pig_clicker) {
+                    card_div.addEventListener('click', function () {
+                        set_pig_clicker_pig(pigs_list[i]);
+                    });
+                    card_div.className = "card_button";
                 } else {
-                    card_div.style = "width: min-content; border: 8px solid grey; border-radius: 12px; background: grey;"
+
+                    var color1;
+                    var color2;
+                    var out_line_color;
+                    switch (pigs_list[i].rarity) {
+                        case "common":
+                            color1 = "grey"
+                            color2 = "grey"
+                            out_line_color = "black"
+
+                            break;
+                        case "uncommon":
+                            color1 = "darkkhaki"
+                            color2 = "#b7b167"
+                            out_line_color = "black"
+
+                            break;
+                        case "rare":
+                            color1 = "green"
+                            color2 = "#008b00"
+                            out_line_color = "black"
+
+                            break;
+                        case "very rare":
+                            color1 = "darkmagenta"
+                            color2 = "#ad00ad"
+                            out_line_color = "white"
+
+                            break;
+                        case "ultra rare":
+                            color1 = "maroon"
+                            color2 = "#a90020"
+                            out_line_color = "white"
+
+                            break;
+                        default:
+                            color1 = "grey"
+                            color2 = "grey"
+                            break;
+                    }
+
+                    card_div.style = "width: min-content; border: 8px solid "+ color1 +"; border-radius: 12px; background: repeating-linear-gradient(45deg, " + color1 + ", " + color2 + " 100px);"
                 }
 
                 pig_table.appendChild(table_row);
@@ -324,7 +363,10 @@
                 img.src = "pigs_pictures/" + pigs_list[i].name + ".jpg";
                 img.setAttribute('draggable', false);
 
+                
+
                 var pig_name = document.createElement("h1");
+                var pig_rarity = document.createElement("h1");
                 var pig_description = document.createElement("p");
 
                 var claim_a_pig_button
@@ -338,11 +380,15 @@
                 }
 
                 pig_name.textContent = pigs_list[i].name;
+                pig_rarity.textContent = pigs_list[i].rarity;
+                pig_rarity.style.color = color1;
+                pig_rarity.style.textShadow = "-1px -1px 0 " + out_line_color + ", 1px -1px 0 " + out_line_color + ", -1px 1px 0 " + out_line_color + ", 1px 1px 0 " + out_line_color + ""
                 pig_description.textContent = pigs_list[i].description;
 
                 table_date.appendChild(card_div);
                 card_div.appendChild(img);
                 card_div.appendChild(pig_name);
+                card_div.appendChild(pig_rarity);
                 card_div.appendChild(pig_description);
                 if (!is_owned_pig_list) {
                     card_div.appendChild(claim_a_pig_button);
@@ -364,10 +410,13 @@
                 document.getElementById("div_about").style.display = "block";
                 document.getElementById("div_pigs").style.display = "none";
                 document.getElementById("div_pig-clicker").style.display = "none";
+                document.getElementById("div_pig-roulette").style.display = "none";
+
 
                 document.getElementById("button1").disabled = true;
                 document.getElementById("button2").disabled = false;
                 document.getElementById("button3").disabled = false;
+                document.getElementById("button4").disabled = false;
 
                 document.querySelector("html").style.overflow = "auto"
 
@@ -378,10 +427,13 @@
                 document.getElementById("div_about").style.display = "none";
                 document.getElementById("div_pigs").style.display = "block";
                 document.getElementById("div_pig-clicker").style.display = "none";
+                document.getElementById("div_pig-roulette").style.display = "none";
+
 
                 document.getElementById("button1").disabled = false;
                 document.getElementById("button2").disabled = true;
                 document.getElementById("button3").disabled = false;
+                document.getElementById("button4").disabled = false;
 
                 document.querySelector("html").style.overflow = "auto"
 
@@ -391,14 +443,33 @@
                 document.getElementById("div_about").style.display = "none";
                 document.getElementById("div_pigs").style.display = "none";
                 document.getElementById("div_pig-clicker").style.display = "block";
+                document.getElementById("div_pig-roulette").style.display = "none";
+
 
                 document.getElementById("button1").disabled = false;
                 document.getElementById("button2").disabled = false;
                 document.getElementById("button3").disabled = true;
+                document.getElementById("button4").disabled = false;
 
                 document.querySelector("html").style.overflow = "hidden"
 
                 break;
+            case 4:
+
+                document.getElementById("div_about").style.display = "none";
+                document.getElementById("div_pigs").style.display = "none";
+                document.getElementById("div_pig-clicker").style.display = "none";
+                document.getElementById("div_pig-roulette").style.display = "block";
+
+                document.getElementById("button1").disabled = false;
+                document.getElementById("button2").disabled = false;
+                document.getElementById("button3").disabled = false;
+                document.getElementById("button4").disabled = true;
+
+                document.querySelector("html").style.overflow = "auto"
+
+                break;
+            
 
             default:
                 break;
@@ -423,8 +494,28 @@
         }
     }
 
-    function set_pig_clicker_pig(pig_to_set){
-        console.log(pig_to_set)
+    function set_pig_clicker_pig(pig_to_set) {
+        div_clicking_pig = document.getElementById("div_clicking_pig");
+
+        div_clicking_pig.replaceChildren()
+
+        var pig_name = document.createElement("h1");
+        pig_name.textContent = pig_to_set.name;
+
+        
+        var div_pig_holder = document.createElement("div");
+        div_pig_holder.style = "width: 400px;height: 400px;border: 8px solid grey;border-radius: 12px;background: grey;"
+
+        var pig_img = document.createElement("img");
+
+        pig_img.src = "pigs_pictures/" + pig_to_set.name + ".jpg";
+        pig_img.setAttribute('draggable', false);
+        
+        div_clicking_pig.appendChild(pig_name);
+        div_clicking_pig.appendChild(div_pig_holder);
+        div_pig_holder.appendChild(pig_img);
+        
+        
     }
 
 
