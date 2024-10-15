@@ -136,13 +136,110 @@
 
     </div>
 
-    <div id="div_about" class="page" style="display: block;">
+    <div id="div_about" class="page" style="display: block;color: white;">
 
 
         <h1 style="
     text-align: center;
     font-size: 50px;
     ">About</h1>
+
+<div class="container">
+    <div class="section">
+        <h2>Welcome to Pigs Я Us</h2>
+        <p>Where collecting meets excitement! We’re a unique marketplace designed for collectors, offering a vast array of items that you can discover. Our mission is to create a vibrant community where every item tells a story, and every collector finds joy in the thrill of the hunt.</p>
+    </div>
+
+
+    <div class="section">
+        <h2>Our Concept</h2>
+        <ul>
+            <li><strong onclick="switch_page(2)" style="cursor: pointer;">Collectible Items:</strong> Browse our extensive selection of unique and rare items. From limited-edition collectibles to everyday treasures, there’s something for everyone!</li>
+            <li><strong>Earn Virtual Coins:</strong> The rarer the item, the more virtual coins you earn! Each item you collect adds to your virtual wealth, enhancing your collecting experience.</li>
+            <li><strong onclick="switch_page(3)" style="cursor: pointer;">Gamble &amp; Play:</strong> Use your hard-earned coins to spin the wheel on our online roulette! Try your luck for a chance to win even more points.</li>
+            <!-- or exclusive items. -->
+        </ul>
+    </div>
+
+
+    <div class="section">
+        <h2>Join Our Community</h2>
+        <p>When you shop with us, you’re not just purchasing items; you’re joining a community of passionate collectors. Connect with fellow enthusiasts, share your collections, and participate in exciting events and challenges.</p>
+    </div>
+
+
+    <div class="section">
+        <h2>Why Choose Us?</h2>
+        <ul>
+            <li><strong>Exciting Rewards:</strong> Our system encourages collecting and rewards your passion with opportunities to win even more.</li>
+            <li><strong>Diverse Inventory:</strong> We curate a wide range of items, ensuring there’s always something new and exciting for you to explore.</li>
+            <li><strong>Secure &amp; Fun:</strong> Your security is our priority. Enjoy a safe shopping and gaming experience with user-friendly features.</li>
+        </ul>
+    </div>
+</div>
+
+<hr>
+
+<h1 style="
+    text-align: center;
+    font-size: 50px;
+    ">Our team:</h1>
+
+    <div style="display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;" >
+        <h1>Oleg</h1>
+        <h1>Nicola</h1>
+        <h1>Cam</h1>
+        <h1>Jack</h1>
+    </div>
+
+<hr>
+
+<div style="
+width: fit-content;
+border: 8px solid lightgrey;
+border-radius: 12px;
+text-align: center;
+background: lightgrey;
+">
+
+
+
+<h1 style="color: black;">Rarities:</h1>
+
+    <div style="border: 8px solid grey;border-radius: 12px;background: repeating-linear-gradient(45deg, grey, grey 100px);text-align: center;">
+        <h1>common : 100 pig coins</h1>
+    </div>
+    <div style="
+border: 8px solid darkkhaki;
+border-radius: 12px;
+background: repeating-linear-gradient(45deg, darkkhaki, rgb(183, 177, 103) 100px);
+">
+        <h1>uncommon : 200 pig coins</h1>
+    </div>
+    <div style="
+border: 8px solid green;
+border-radius: 12px;
+background: repeating-linear-gradient(45deg, green, rgb(0, 139, 0) 100px);
+">
+        <h1 >rare : 300 pig coins</h1>
+    </div>
+    <div style="
+border: 8px solid darkmagenta;
+border-radius: 12px;
+background: repeating-linear-gradient(45deg, darkmagenta, rgb(173, 0, 173) 100px);
+">
+        <h1>very rare : 400 pig coins</h1>
+    </div>
+    <div style="
+border: 8px solid maroon;
+border-radius: 12px;
+background: repeating-linear-gradient(45deg, maroon, rgb(169, 0, 32) 100px);
+">
+        <h1>ultra rare : 500 pig coins</h1>
+    </div>
+</div>
 
 
 
@@ -604,7 +701,7 @@
 
             // localStorage.pigs[localStorage.pigs.lenght] = JSON.stringify(pig_to_claim);
         } else {
-            alert("Wrond code");
+            alert("Wrong code");
         }
     }
 
